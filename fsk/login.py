@@ -5,13 +5,13 @@ app = Flask(__name__, template_folder="/home/rams/Desktop/HTML")
 
 @app.route('/success/<name>')
 def success(name):
-    return "Hello %s!" %name
+    return 'Welcome %s!' %name
 
 
 
-@app.route('/login', methods = ['POST','GET'])
+@app.route('/login',methods = ['POST','GET'])
 def login():
-    if request.method=='POST':
+    if request.method == 'POST':
         user = request.form['nm']
         return redirect(url_for('success', name = user))
     else:
