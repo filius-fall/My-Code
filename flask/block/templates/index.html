@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Registere For Branch</h1>
+    <form action="/register" method="post">
+        <input type="text" name="name" placeholder="NAME">
+        <select name="branch">
+            <option disabled selected value="">Branch</option>
+            <option value="EEE">EEE</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+        </select>
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}
