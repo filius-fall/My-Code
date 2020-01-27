@@ -1,0 +1,13 @@
+body{
+    background-image: url("images/snapshot.jpeg");
+    background-color:blueviolet;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+p{
+    font-style: initial;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: lawngreen;
+}
