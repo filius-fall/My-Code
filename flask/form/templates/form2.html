@@ -1,0 +1,8 @@
+{% block title %}Flasky{% endblock%}
+
+{% block page_content %}
+    <form method='POST'>
+        {{ form.name.label }}{{ form.name }}
+        {{ form.submit() }}
+    </form>
+{% endblock %}
