@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+    <ul>
+        {% for row in rows %}
+            <li>{{ row['name'] }} is Registerd</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
