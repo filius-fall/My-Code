@@ -3,8 +3,8 @@
 {% block content %}
 <!-- CONTACT -->
 <section id="contact" data-stellar-background-ratio="0.5">
-    <div class="container content-section">
-            <div class="row">
+    <div class="container content-section scroll">
+            <div class="scroll">
                    
                    
                    
@@ -71,10 +71,12 @@
                                     {{ form.confirm_password(class='form-control form-control-lg') }}
                                 {% endif%}
                             </div>
+
+                            <div class="col-md-6 col-sm-6 form-group">
+                                {{ form.submit(class="btn btm-outline-info") }}
+                            </div>
                         </fieldset>     
-                        <div class="col-md-6 col-sm-6 form-group">
-                            {{ form.submit(class="btn btm-outline-info") }}
-                        </div>
+                        
                    </form>
 
             </div>

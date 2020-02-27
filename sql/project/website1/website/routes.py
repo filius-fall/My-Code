@@ -1,10 +1,11 @@
-from flask import Flask,render_template,url_for,redirect,flash,redirect
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm,LoginForm
+from flask import render_template,url_for,redirect,flash,redirect
+from website import app,db,bcrypt
+from website.forms import RegistrationForm,LoginForm
+from website.models import User,Post
 
 
-app=Flask(__name__)
-app.config['SECRET_KEY'] = '354674946436746341416r4ws64r6we4fw'
+
+
 
 
 posts = [
@@ -36,10 +37,13 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account Created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
-    else:
-        return render_template('register.html', title='Register', form=form)
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Your account has been created! Now you can Login', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
 
 @app.route('/login',methods=['POST','GET'])
 def login():
@@ -51,6 +55,3 @@ def login():
         else:
             flash(f"Incorrect details or you haven't registered", 'danger' )
     return render_template('login.html', title='Login', form=form)
-
-if __name__ == "__main__":
-    app.run(debug=True)
