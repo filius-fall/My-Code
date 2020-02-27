@@ -1,8 +1,8 @@
 from flask import render_template,url_for,redirect,flash,redirect
-from website import app,db,bcrypt
+from website import app,db,bcrypt,login_manager
 from website.forms import RegistrationForm,LoginForm
 from website.models import User,Post
-
+from flask_login import login_user
 
 
 
@@ -43,15 +43,16 @@ def register():
         db.session.commit()
         flash(f'Your account has been created! Now you can Login', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register2.html', title='Register', form=form)
 
 @app.route('/login',methods=['POST','GET'])
 def login():
     form=LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'asreeram1729@gmail.com' and form.password.data == 'password':
-            flash(f'You have been logged succesfully!', 'success')
+        user = User.query.filter_by(username=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('home'))
         else:
             flash(f"Incorrect details or you haven't registered", 'danger' )
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login1.html', title='Login', form=form)
