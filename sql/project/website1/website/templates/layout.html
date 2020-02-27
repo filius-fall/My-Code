@@ -66,8 +66,13 @@
                                 </ul>
 
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href={{ url_for('login') }}><font color='black'>Already have an account!? <i class="fa fa-phone"></i> Log-in</font></a></li>
-                                    <a href={{ url_for('register') }} class="section-btn">Register</a>
+                                    {% if current_user.is_authenticated %}
+                                    <a href={{ url_for('logout') }} class="section-btn">logout</a>
+
+                                    {% else %}
+                                        <li><a href={{ url_for('login') }}><font color='black'>Already have an account!? <i class="fa fa-phone"></i> Log-in</font></a></li>
+                                        <a href={{ url_for('register') }} class="section-btn">Register</a>
+                                    {% endif %}
                                 </ul>
                         </div>
 
