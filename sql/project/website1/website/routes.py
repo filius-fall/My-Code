@@ -1,39 +1,38 @@
-from flask import render_template,url_for,redirect,flash,redirect,request
-from website import app,db,bcrypt,login_manager
-from website.forms import RegistrationForm,LoginForm
-from website.models import User,Post
-from flask_login import login_user,current_user,logout_user, login_required
-
-
-
+from flask import render_template, url_for, flash, redirect, request
+from website import app, db, bcrypt
+from website.forms import RegistrationForm, LoginForm
+from website.models import User, Post
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 posts = [
     {
-        'author':'A.Sreeram',
-        'title':'Website1',
-        'content':'This is my first website content',
-        'date_posted':'February 20,2020', 
+        'author': 'Filius-Fall',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'Feb 20, 2020'
     },
     {
-        'author':'Bruce Wayne',
-        'title':'Website_1',
-        'content':'This is my  second website website',
-        'date_posted':'February 21,2020', 
+        'author': 'Batman',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'Feb 21, 2020'
     }
 ]
 
-@app.route('/')
-@app.route('/home')
+
+@app.route("/")
+@app.route("/home")
 def home():
-    return render_template('home.html', posts=posts , title='Home')
+    return render_template('home.html', posts=posts)
 
-@app.route('/about')
+
+@app.route("/about")
 def about():
-    return render_template('about.html', posts=posts, title='About')
+    return render_template('about.html', title='About')
 
 
-@app.route('/register',methods=['POST','GET'])
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -43,35 +42,35 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash(f'Your account has been created! Now you can Login', 'success')
+        flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('login'))
     return render_template('register2.html', title='Register', form=form)
 
-@app.route('/login',methods=['POST','GET'])
+
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    form=LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
-            
         else:
-            flash(f"Incorrect details or you haven't registered", 'danger' )
+            flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login1.html', title='Login', form=form)
 
 
-@app.route('/logout')
+@app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
 
-@app.route('/account')
+@app.route("/account")
 @login_required
 def account():
-    return render_template('account.html', title='Account')
-
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template('account.html', title='Account', image_file=image_file)
