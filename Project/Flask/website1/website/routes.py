@@ -83,13 +83,28 @@ def logout():
 #     i.save(picture_path)
 
 #     return picture_fn
+def picture_save(picture_form):
+    random_hex = secrets.token_hex(8)
+    _, file_ext = os.path.splitext(picture_form.filename)
+    picture_name = random_hex + file_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_name)
+    picture_form.save(picture_path)
 
+    output_size = (200,200)
+    i = Image.open(picture_form)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    
+    return picture_name
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = picture_save(form.picture.data)
+            current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
