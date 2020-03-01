@@ -9,9 +9,12 @@
 <div class="col-md-6 col-sm-12">
     <div class="wow fadeInUp image">
         {% for post in posts %}
-            <h1>{{ post.title}}</h1>
-            <p>By {{ post.author }} on {{ post.date_posted }}</p>
-            <p>{{ post.content }}</p>
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                <h1>{{ post.title}}</h1>
+                <p>By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                <p>{{ post.content }}</p>
+            </article>
               
         {% endfor %}
          

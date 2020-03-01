@@ -65,6 +65,7 @@
 
                                 <ul class="nav navbar-nav navbar-right">
                                     {% if current_user.is_authenticated %}
+                                        <a href={{ url_for('new_post') }} class="section-btn">Create Post</a>
                                         <li><a href={{ url_for('account') }}><font color='black'>{{ current_user.username }}'s Account</font></a></li>
                                         <a href={{ url_for('logout') }} class="section-btn">logout</a>
                                     {% else %}
