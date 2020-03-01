@@ -1,7 +1,7 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from website import app, db, bcrypt
 from website.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreatePost
 from website.models import User, Post
@@ -103,7 +103,7 @@ def new_post():
         db.session.commit()
         flash('Post has been created', 'success')
         return redirect(url_for('home'))
-    return render_template('create_post.html',title='New Post',form=form,)
+    return render_template('create_post.html',title='New Post',form=form,legend='Create_Post')
 
 
 @app.route("/post/<int:post_id>",methods=['GET','POST'])
@@ -111,3 +111,21 @@ def new_post():
 def post_page(post_id):
     post=Post.query.get_or_404(post_id)
     return render_template('post.html',post=post)
+
+@app.route("/post/<int:post_id>/update", methods=['GET','POST'])
+@login_required
+def update_post(post_id):
+    post=Post.query.get_or_404(post_id)
+    form=CreatePost()
+    if post.author != current_user:
+        abort(403)
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('You have been Updated!!!!!', 'success')
+        return redirect(url_for('post_page',post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html',title='Update Post',legend='Update_Post',form=form,post=post)

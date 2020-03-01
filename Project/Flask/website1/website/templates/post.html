@@ -11,6 +11,10 @@
                 <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
                 <h1>{{ post.title}}</h1>
                 <p>By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                <div>
+                    <a class="btn btn-secondary mt-1 mb-1" href="{{ url_for('update_post') }}">Update</a>
+                    
+                </div>
                 <p>{{ post.content }}</p>
             </article>
         
