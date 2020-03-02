@@ -1,0 +1,18 @@
+# website
+
+
+you need to  install some libraries to run this 
+
+1. pip install SQLAlchemy
+
+2. pip install flask-bcrypt
+
+3. pip install Flask-Login
+
+4. pip install Flask-WTF
+
+5. pip install DateTime
+
+6. pip install Pillow==2.2.1
+
+7. and ofcourse pip install Flask
