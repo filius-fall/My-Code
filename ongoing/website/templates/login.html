@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- CONTACT -->
+<section id="contact" data-stellar-background-ratio="0.5">
+    <div class="container content-section">
+            <div>
+                   
+                   
+                   
+                   <form method="POST" action="" class="wow fadeInUp" id="contact-form" role="form" data-wow-delay="0.5s">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            
+                            <div>
+                                <h1 style="list-style: -webkit-repeating-linear-gradient();">Log in</h1>
+                            </div>
+                            
+                            <br>
+                            
+                            <div class="col-md-12 col-sm-12 form-group">
+                                {{ form.email.label(class='form-control-label') }}
+                                {{ form.email(class='form-control form-control-lg') }}
+                            </div>
+                            
+                            <div class="col-md-12 col-sm-12 form-group">
+                                {{ form.password.label(class='form-control-label') }}
+                                {{ form.password(class='form-control form-control-lg') }}
+                            </div>
+                            <div class="col-md-12 col-sm-12 form-group">
+                                {{ form.submit(class="btn btm-outline-info") }}
+                            </div>
+                            <div class="col-md-12 col-sm-12 form-group">
+                                {{ form.remember(class="form-check-input") }}
+                                {{ form.remember.label(class="form-check-label") }}
+                            </div>
+                            <small class="text-muted ml-2">
+                                <a href="#">Forgot Password</a>
+        
+                            </small>
+
+                        </fieldset>     
+                       
+                   </form>
+                       
+
+            </div>
+    </div>
+</section>          
+
+{% endblock %}
