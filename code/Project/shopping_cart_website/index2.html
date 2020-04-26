@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>VueJs Introduction</title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+
+<body>
+    <!-- below works on app.js
+    <div id="new" style=" text - align : center ; ">
+      <h1>FirstName: {{firstname}}</h1>
+      <h1>LastName: {{lastname}}</h1>
+      <h1>{{mydetails()}}</h1>
+    </div>
+    <script text="text/javascript" src="js/app.js"></script> -->
+
+    <!-- below works on 01.js-->
+    <!--   
+        <div id="new">
+            <h1> Movie name: {{ movie }} </h1>
+            <h2> Realese Year: {{ year }}</h2>
+            <h3> The movie is {{ moviefunc(year) ? 'old' : 'new' }}</h3>
+            <h4 v-bind:title="title">Move your cursor on this</h4>
+        </div>
+
+
+        <script type="text/javascript" src="js/01.js"></script>
+    -->
+
+    <!-- This all work under tink.js  -->
+    <!-- <div>
+        <div id="tink1">
+            <span v-text="fname"></span>
+            <span v-once>{{ lname }}</span>
+            <br>
+            <span v-html="address"></span>
+            </br>
+            <a v-bind:href="website">{{ fname }}</a>
+            <br>
+            <input v-model="message" placeholder="Enter a message">
+                <p>Message is: {{ message }}</p>
+            <select v-model="selected">
+                <option disabled value="">Choose a fruit</option>
+                <option>Apple</option>
+                <option>Banana</option>
+                <option>Strawberry</option>
+            </select>
+                <span>Fruit chosen: {{ selected }}</span>
+             <p v-if="shouldShowThis">Hey!</p>
+            <ul>
+                <li v-for="item in items" :key="item.title">{{ item.title }}</li>
+                <li v-for="item in items" :key="item.title">{{ item.id }}</li>
+            </ul>
+            <template>
+                <button v-on:click.once ="handleClick">Click me!</button>
+            </template>
+            <br>
+            <br>
+            <input type="text" v-model.lazy="age" v-on:keyup.enter="keyboardclick" placeholder= "Alert Pops when Hit enter" size="60"/>
+            <p>{{ age }}</p>
+            <p>{{ typeof age }}</p>
+
+            <button v-on:click="value1 = !value1">Click Here</button>
+            <h1 v-if="value1">Tada Its Magic</h1>
+            
+        </div>
+        <script type="text/javascript" src="js/tink.js"></script> -->
+
+    <!-- </div> -->
+    <div id="app">
+        <p>{{ name }}</p>
+        <script src="js/app.js"></script>
+    </div>
+</body>
+
+</html>
