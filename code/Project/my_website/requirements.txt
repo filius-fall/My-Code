@@ -62,7 +62,7 @@ pluggy==0.13.1
 protobuf==3.11.3
 psutil==5.4.2
 ptyprocess==0.6.0
-py==1.8.1
+py==1.10.0
 pyaes==1.6.1
 pycairo==1.16.2
 pycparser==2.20
